@@ -1,6 +1,3 @@
-#include "PrintHello.hpp"
+#include <iostream>
 
-int main()
-{
-    printHello();
-}
+int main() { std::cout << "Hello World!"; }
