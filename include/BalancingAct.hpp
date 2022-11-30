@@ -17,9 +17,12 @@ const double STOREMAN_SALARY = 5e3;
 const double MARKETER_SALARY = 5e3;
 const double WORKER_SALARY = 5e3;
 
-const unsigned int N = 3;  // number of months to calculate an average income
-const unsigned int X = 12; // credit deadline
-const double INTEREST_RATE = 0.1; // 10%
+const unsigned int N = 3; // number of months to calculate an average income
+
+const double MAX_CREDIT_COEFF = 5;
+const unsigned int X = 12;    // credit deadline
+const double MAX_RRSO = 0.2;  // 20%
+const double MIN_RRSO = 0.05; // 5%
 const double INITIAL_BALANCE = 1e4;
 
 const double FORKLIFT_LICENSE_PROBABILITY = 0.5;
