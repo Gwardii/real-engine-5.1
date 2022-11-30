@@ -10,7 +10,6 @@
 #include <sstream>
 #include <string>
 
-
 struct RandomIntGenerator {
   static std::mt19937 prng;
 };
@@ -31,7 +30,17 @@ constexpr std::array last_names{
     "Rhodes",     "Abrams",  "McFaul",  "Stone",   "Sisley", "Hanneman",
 };
 
-std::string get_random_name() {
+constexpr std::array faculties{
+    "Faculty of Automotive and Construction Machinery Engineering",
+    "Faculty of Chemical and Process Engineering",
+    "Faculty of Electrical Engineering",
+    "Faculty of Electronics and Information Technology",
+    "Faculty of Mathematics and Information Science",
+    "Faculty of Mechatronics",
+    "Faculty of Transport",
+    "Faculty of Power and Aeronautical Engineering"};
+
+std::string getRandomName() {
   std::uniform_int_distribution<std::size_t> fnd{0, first_names.size() - 1};
   std::uniform_int_distribution<std::size_t> lnd{0, last_names.size() - 1};
   std::stringstream name;
@@ -40,4 +49,23 @@ std::string get_random_name() {
   return name.str();
 }
 
+std::string getRandomFaculty() {
+  std::uniform_int_distribution<std::size_t> fnd{0, first_names.size() - 1};
+  return faculties[fnd(RandomIntGenerator::prng)];
+}
+
+bool getRandomBoolean(double p) {
+  std::bernoulli_distribution fnd{p};
+  return (bool)fnd(RandomIntGenerator::prng);
+}
+
+int getRandomInt(unsigned int min, unsigned int max) {
+  std::uniform_int_distribution<unsigned int> fnd{min, max - 1};
+  return fnd(RandomIntGenerator::prng);
+}
+
+double getRandomDouble(double min, double max) {
+  std::normal_distribution fnd{(max + min) / 2, (max - min) / 6};
+  return fnd(RandomIntGenerator::prng);
+}
 #endif // P1_CPP_LAB_RANDOMNAMEGENERATOR_HPP
