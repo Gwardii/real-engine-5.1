@@ -3,15 +3,19 @@
 
 Employee::Employee() : name{getRandomName()} {}
 
-void Employee::print() {
-  std::cout << "My name is " << name << "." << std ::endl;
+std::string Employee::print() {
+  static const std::string auto_tab{"                    "};
+  std::stringstream stream;
+  stream << name << auto_tab.substr(name.size()) << "| ";
+  return stream.str();
 }
 
 Engineer::Engineer() : faculty{getRandomFaculty()} {}
 
-void Engineer::print() {
-  std::cout << "My name is " << name << " and I have graduated from " << faculty
-            << "." << std::endl;
+std::string Engineer::print() {
+  std::stringstream stream;
+  stream << Employee::print() << faculty << std::endl;
+  return stream.str();
 }
 
 Storeman::Storeman() {
@@ -19,18 +23,22 @@ Storeman::Storeman() {
       getRandomBoolean(statutorily::FORKLIFT_LICENSE_PROBABILITY);
 }
 
-void Storeman::print() {
-  std::cout << "My name is " << name << " and I " << dont[(int)forklift_licence]
-            << "have a forklift license." << std::endl;
+std::string Storeman::print() {
+  std::stringstream stream;
+  stream << Employee::print() << dont[(size_t)forklift_licence] << std::endl;
+  return stream.str();
 }
 
 Marketer::Marketer() {
-  no_followers = getRandomInt(0, statutorily::MAX_NO_FOLLOWERS);
+  no_followers = (unsigned int)std::clamp(
+      getRandomDouble(0, statutorily::MAX_NO_FOLLOWERS), 0.,
+      statutorily::MAX_NO_FOLLOWERS);
 }
 
-void Marketer::print() {
-  std::cout << "My name is " << name << " and I have " << no_followers
-            << " followers." << std::endl;
+std::string Marketer::print() {
+  std::stringstream stream;
+  stream << Employee::print() << no_followers << std::endl;
+  return stream.str();
 }
 
 Worker::Worker() {
@@ -42,19 +50,10 @@ Worker::Worker() {
       10.;
 }
 
-void Worker::print() {
-  std::cout << "My name is " << name << " and I have a foot size " << foot_size
-            << "." << std::endl;
-}
-
-_NODISCARD _CONSTEXPR17 EmployeesArray::iterator
-EmployeesArray::end() noexcept {
-  return iterator(_Elems, no_employees);
-}
-
-_NODISCARD _CONSTEXPR17 EmployeesArray::const_iterator
-EmployeesArray::end() const noexcept {
-  return const_iterator(_Elems, no_employees);
+std::string Worker::print() {
+  std::stringstream stream;
+  stream << Employee::print() << foot_size << std::endl;
+  return stream.str();
 }
 
 void EmployeesArray::pushBack(Employee_t employee) {
@@ -62,6 +61,13 @@ void EmployeesArray::pushBack(Employee_t employee) {
     _Xran();
   }
   _Elems[no_employees++] = employee;
+  no_employees_with_position[employee.index()]++;
 }
 
-size_t EmployeesArray::size() { return no_employees; }
+size_t EmployeesArray::size() const { return no_employees; }
+
+size_t EmployeesArray::getNoEmplyoeesWithPosition(size_t id) const {
+  return no_employees_with_position[id];
+}
+
+Employee_t EmployeesArray::operator[](size_t i) const { return _Elems[i]; }

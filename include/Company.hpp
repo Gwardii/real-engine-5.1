@@ -3,6 +3,7 @@
 #include "BalancingAct.hpp"
 #include "Credit.hpp"
 #include "Employees.hpp"
+#include <sstream>
 #include <vector>
 
 class Company {
@@ -18,8 +19,8 @@ public:
   Company();
   ~Company();
   void printEmployees() const;
-  void takeCredit(double value, unsigned int deadline);
-  void hireEmployee();
+  void takeOutCredit(double value, unsigned int deadline);
+  template <class T> void hireEmployee() { employees.pushBack(T()); }
   void payOffCredit();
   const double getAccountBalance();
   const double getCompanyValue();

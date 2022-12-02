@@ -26,7 +26,7 @@ const double MIN_RRSO = 0.05; // 5%
 const double INITIAL_BALANCE = 1e4;
 
 const double FORKLIFT_LICENSE_PROBABILITY = 0.5;
-const int MAX_NO_FOLLOWERS = 5000000;
+const double MAX_NO_FOLLOWERS = 5000000;
 const double MIN_FOOT_SIZE = 36;
 const double MAX_FOOT_SIZE = 48;
 } // namespace statutorily

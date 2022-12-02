@@ -31,15 +31,15 @@ constexpr std::array last_names{
 };
 
 constexpr std::array faculties{
-    "Faculty of Automotive and Construction Machinery Engineering",
-    "Faculty of Chemical and Process Engineering",
-    "Faculty of Electrical Engineering",
-    "Faculty of Electronics and Information Technology",
-    "Faculty of Mathematics and Information Science",
-    "Faculty of Mechatronics",
-    "Faculty of Transport",
-    "Faculty of Power and Aeronautical Engineering",
-    "Faculty of Scooters and Small Bicycles"};
+    "Automotive and Construction Machinery Engineering",
+    "Chemical and Process Engineering",
+    "Electrical Engineering",
+    "Electronics and Information Technology",
+    "Mathematics and Information Science",
+    "Mechatronics",
+    "Transport",
+    "Power and Aeronautical Engineering",
+    "Scooters and Small Bicycles"};
 
 std::string getRandomName() {
   std::uniform_int_distribution<std::size_t> fnd{0, first_names.size() - 1};
@@ -58,11 +58,6 @@ std::string getRandomFaculty() {
 bool getRandomBoolean(double p) {
   std::bernoulli_distribution fnd{p};
   return (bool)fnd(RandomIntGenerator::prng);
-}
-
-int getRandomInt(unsigned int min, unsigned int max) {
-  std::uniform_int_distribution<unsigned int> fnd{min, max - 1};
-  return fnd(RandomIntGenerator::prng);
 }
 
 double getRandomDouble(double min, double max) {
