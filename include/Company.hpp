@@ -5,12 +5,11 @@
 #include "Employees.hpp"
 #include <vector>
 
-
 class Company {
 private:
   double account_balance;
   std::vector<std::unique_ptr<Credit>> credits;
-  std::vector<std::unique_ptr<Employee_t>> employees;
+  EmployeesArray employees;
   std::vector<double> income_history;
 
   const double getIncome();
@@ -18,7 +17,7 @@ private:
 public:
   Company();
   ~Company();
-  void printEmployees();
+  void printEmployees() const;
   void takeCredit(double value, unsigned int deadline);
   void hireEmployee();
   void payOffCredit();

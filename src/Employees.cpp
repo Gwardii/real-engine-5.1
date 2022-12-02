@@ -1,16 +1,16 @@
 #include "Employees.hpp"
 #include "RandomNameGenerator.hpp"
 
-Employee::Employee() { name = getRandomName(); }
+Employee::Employee() : name{getRandomName()} {}
 
 void Employee::print() {
   std::cout << "My name is " << name << "." << std ::endl;
 }
 
-Engineer::Engineer() { faculty = getRandomFaculty(); }
+Engineer::Engineer() : faculty{getRandomFaculty()} {}
 
 void Engineer::print() {
-  std::cout << "My name is " << name << " and I have graduated " << faculty
+  std::cout << "My name is " << name << " and I have graduated from " << faculty
             << "." << std::endl;
 }
 
@@ -46,3 +46,22 @@ void Worker::print() {
   std::cout << "My name is " << name << " and I have a foot size " << foot_size
             << "." << std::endl;
 }
+
+_NODISCARD _CONSTEXPR17 EmployeesArray::iterator
+EmployeesArray::end() noexcept {
+  return iterator(_Elems, no_employees);
+}
+
+_NODISCARD _CONSTEXPR17 EmployeesArray::const_iterator
+EmployeesArray::end() const noexcept {
+  return const_iterator(_Elems, no_employees);
+}
+
+void EmployeesArray::pushBack(Employee_t employee) {
+  if (statutorily::MAX_NO_EMPLOYEES <= no_employees + 1) {
+    _Xran();
+  }
+  _Elems[no_employees++] = employee;
+}
+
+size_t EmployeesArray::size() { return no_employees; }

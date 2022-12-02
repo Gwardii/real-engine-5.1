@@ -14,7 +14,7 @@ protected:
 
 public:
   Employee();
-  virtual void print();
+  void print();
 };
 class Engineer : Employee {
 private:
@@ -22,7 +22,7 @@ private:
 
 public:
   Engineer();
-  void print() override;
+  void print();
 };
 class Storeman : Employee {
 private:
@@ -31,7 +31,7 @@ private:
 
 public:
   Storeman();
-  void print() override;
+  void print();
 };
 class Marketer : Employee {
 private:
@@ -39,7 +39,7 @@ private:
 
 public:
   Marketer();
-  void print() override;
+  void print();
 };
 class Worker : Employee {
 private:
@@ -47,7 +47,23 @@ private:
 
 public:
   Worker();
-  void print() override;
+  void print();
 };
 
 using Employee_t = std::variant<Engineer, Storeman, Marketer, Worker>;
+
+class EmployeesArray
+    : public std::array<Employee_t, statutorily::MAX_NO_EMPLOYEES> {
+private:
+  size_t no_employees{0};
+
+public:
+  using iterator =
+      std::_Array_iterator<Employee_t, statutorily::MAX_NO_EMPLOYEES>;
+  using const_iterator =
+      std::_Array_const_iterator<Employee_t, statutorily::MAX_NO_EMPLOYEES>;
+  _NODISCARD _CONSTEXPR17 iterator end() noexcept;
+  _NODISCARD _CONSTEXPR17 const_iterator end() const noexcept;
+  void pushBack(Employee_t employee);
+  size_t size();
+};

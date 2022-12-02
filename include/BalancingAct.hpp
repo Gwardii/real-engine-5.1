@@ -1,7 +1,7 @@
 #pragma once
 
 namespace statutorily {
-const size_t MAX_NO_WORKERS = 5000;
+const size_t MAX_NO_EMPLOYEES = 5000;
 const size_t MAX_NO_CREDITS = 5000;
 const double MAX_CREDIT = 1e4;
 

@@ -38,7 +38,8 @@ constexpr std::array faculties{
     "Faculty of Mathematics and Information Science",
     "Faculty of Mechatronics",
     "Faculty of Transport",
-    "Faculty of Power and Aeronautical Engineering"};
+    "Faculty of Power and Aeronautical Engineering",
+    "Faculty of Scooters and Small Bicycles"};
 
 std::string getRandomName() {
   std::uniform_int_distribution<std::size_t> fnd{0, first_names.size() - 1};
@@ -50,7 +51,7 @@ std::string getRandomName() {
 }
 
 std::string getRandomFaculty() {
-  std::uniform_int_distribution<std::size_t> fnd{0, first_names.size() - 1};
+  std::uniform_int_distribution<std::size_t> fnd{0, faculties.size() - 1};
   return faculties[fnd(RandomIntGenerator::prng)];
 }
 
