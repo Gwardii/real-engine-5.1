@@ -10,4 +10,7 @@ int main() {
   com.printEmployees();
   com.takeOutCredit(1000, 1);
   com.payOffCredits();
+  com.getIncome();
+  com.getIncome();
+  std::cout << com.getCompanyValue();
 }

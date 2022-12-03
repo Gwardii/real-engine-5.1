@@ -4,8 +4,10 @@
 #include "Credit.hpp"
 #include "Employees.hpp"
 #include <list>
+#include <numeric>
 #include <sstream>
 #include <vector>
+
 
 class Company {
 private:
@@ -24,6 +26,6 @@ public:
   void paySalaries();
   void payOffCredits();
   void getIncome();
-  const double getAccountBalance();
-  const double getCompanyValue();
+  const double getAccountBalance() const;
+  const double getCompanyValue() const;
 };

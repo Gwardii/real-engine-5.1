@@ -89,8 +89,10 @@ void Company::getIncome() {
   long long sold_products =
       (demand < products_in_store) ? demand : products_in_store;
   products_in_store -= sold_products;
-  account_balance +=
+  double income =
       statutorily::CI * sold_products * employees.getNoEmplyoeesWithPosition(0);
+  account_balance += income;
+  income_history.push_back(income);
 }
 
 void Company::payOffCredits() {
@@ -104,4 +106,13 @@ void Company::payOffCredits() {
       ++it;
     }
   }
+}
+
+const double Company::getAccountBalance() const { return account_balance; }
+const double Company::getCompanyValue() const {
+  if (income_history.size() > statutorily::N) {
+    return std::accumulate(income_history.end() - statutorily::N,
+                           income_history.end(), 0);
+  }
+  return std::accumulate(income_history.begin(), income_history.end(), 0);
 }
