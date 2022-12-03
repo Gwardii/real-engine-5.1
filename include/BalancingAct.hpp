@@ -7,9 +7,9 @@ const double MAX_CREDIT = 1e4;
 
 // the effectiveness of employees
 const double CI = 1;
-const double CMag = 1;
-const double CMkt = 1;
-const double CR = 1;
+const int CMag = 1;
+const int CMkt = 1;
+const int CR = 1;
 
 // employees' salaries
 const double ENGINEER_SALARY = 5e3;

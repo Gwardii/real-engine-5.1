@@ -68,3 +68,40 @@ void Company::printEmployees() const {
 void Company::takeOutCredit(double value, unsigned int deadline) {
   credits.push_back(std::make_unique<Credit>(value, deadline));
 }
+
+void Company::paySalaries() {
+  account_balance -=
+      statutorily::ENGINEER_SALARY * employees.getNoEmplyoeesWithPosition(0) +
+      statutorily::STOREMAN_SALARY * employees.getNoEmplyoeesWithPosition(1) +
+      statutorily::MARKETER_SALARY * employees.getNoEmplyoeesWithPosition(2) +
+      statutorily::WORKER_SALARY * employees.getNoEmplyoeesWithPosition(3);
+}
+
+void Company::getIncome() {
+  products_in_store +=
+      statutorily::CR * employees.getNoEmplyoeesWithPosition(3);
+  long long store_capacity =
+      statutorily::CMag * employees.getNoEmplyoeesWithPosition(1);
+  products_in_store =
+      (products_in_store < store_capacity) ? products_in_store : store_capacity;
+  long long demand =
+      statutorily::CMkt * employees.getNoEmplyoeesWithPosition(2);
+  long long sold_products =
+      (demand < products_in_store) ? demand : products_in_store;
+  products_in_store -= sold_products;
+  account_balance +=
+      statutorily::CI * sold_products * employees.getNoEmplyoeesWithPosition(0);
+}
+
+void Company::payOffCredits() {
+  bool is_paid_off;
+  for (std::list<std::unique_ptr<Credit>>::iterator it = credits.begin();
+       it != credits.end();) {
+    account_balance -= (*it)->payOffInstalment(is_paid_off);
+    if (is_paid_off) {
+      it = credits.erase(it);
+    } else {
+      ++it;
+    }
+  }
+}

@@ -17,10 +17,10 @@ double Credit::payOffInstalment(bool &is_paid_off) {
   if (--deadline > 0) {
     instalment = base_instalment + value * interest / 12.;
     value = value - base_instalment;
-    is_paid_off = true;
+    is_paid_off = false;
     return instalment;
   }
   instalment = value;
-  is_paid_off = false;
+  is_paid_off = true;
   return instalment;
 }

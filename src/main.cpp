@@ -8,4 +8,6 @@ int main() {
   // com.hireEmployee<int>();
   com.hireEmployee<Engineer>();
   com.printEmployees();
+  com.takeOutCredit(1000, 1);
+  com.payOffCredits();
 }
