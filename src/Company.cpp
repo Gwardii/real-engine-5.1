@@ -53,7 +53,7 @@ void Company::printEmployees() const {
   std::cout << employees_streams[2].str();
   std::cout << separator << separator;
 
-  std::cout << "Workers\t\t Number of marketers: "
+  std::cout << "Workers\t\t Number of workers: "
             << employees.getNoEmplyoeesWithPosition(3)
             << "\t\t Salary per capita:" << statutorily::WORKER_SALARY
             << std::endl;
@@ -67,6 +67,7 @@ void Company::printEmployees() const {
 
 void Company::takeOutCredit(double value, unsigned int deadline) {
   credits.push_back(std::make_unique<Credit>(value, deadline));
+  account_balance += value;
 }
 
 void Company::paySalaries() { account_balance -= calculateSalaries(); }
