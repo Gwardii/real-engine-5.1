@@ -1,6 +1,7 @@
 #pragma once
 
 namespace statutorily {
+const double WIN_CONDITION = 1e6;
 const size_t MAX_NO_EMPLOYEES = 5000;
 const size_t MAX_NO_CREDITS = 5000;
 const double MAX_CREDIT = 1e4;
@@ -19,7 +20,7 @@ const double WORKER_SALARY = 5e3;
 
 const unsigned int N = 3; // number of months to calculate an average income
 
-const double MAX_CREDIT_COEFF = 5;
+const double M = 5;
 const unsigned int X = 12;    // credit deadline
 const double MAX_RRSO = 0.2;  // 20%
 const double MIN_RRSO = 0.05; // 5%
