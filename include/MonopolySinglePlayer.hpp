@@ -7,12 +7,12 @@
 class MonopolySinglePlayer {
 private:
   unsigned int month{1};
-  unsigned int status{0};
+  bool status{true};
   std::unique_ptr<Company> company{std::make_unique<Company>()};
   bool playerAction();
   void printHelp();
   void printInstruction();
-  void tick();
+  void printCompanyStatus();
 
 public:
   MonopolySinglePlayer();

@@ -14,4 +14,5 @@ private:
 public:
   Credit(double value, unsigned int deadline);
   double payOffInstalment(bool &is_paid_off);
+  double const getValue() const;
 };

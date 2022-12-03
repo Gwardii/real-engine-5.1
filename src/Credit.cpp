@@ -24,3 +24,5 @@ double Credit::payOffInstalment(bool &is_paid_off) {
   is_paid_off = true;
   return instalment;
 }
+
+double const Credit::getValue() const { return value; }

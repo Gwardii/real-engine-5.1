@@ -1,5 +1,8 @@
 #include "MonopolySinglePlayer.hpp"
 
+std::string win_message = "CONGRATULATIONS, YOU HAVE WON!";
+std::string lose_message = "Unluckily, you have lost. :(";
+
 bool sanitizeInput() {
   if (!std::cin.good()) {
     std::cin.clear();
@@ -17,16 +20,19 @@ void MonopolySinglePlayer::launch() {
                "company the world has ever seen!"
             << std::endl;
   printHelp();
-  while (status == 0U) {
+  while (status) {
+    printCompanyStatus();
     while (playerAction()) {
     }
     company->getIncome();
     company->paySalaries();
     company->payOffCredits();
     if (company->getCompanyValue() > statutorily::WIN_CONDITION) {
-      status = 1U;
+      status = false;
+      std::cout << win_message << std::endl;
     } else if (company->getAccountBalance() < 0.) {
-      status = 2U;
+      status = false;
+      std::cout << lose_message << std::endl;
     }
   }
 }
@@ -74,6 +80,18 @@ bool MonopolySinglePlayer::playerAction() {
     if (sanitizeInput()) {
       return true;
     }
+    double max_credit{statutorily::M * company->getCompanyValue()};
+    double actual_credit{company->getSumOfAllCredits()};
+    double reserve_credit{max_credit - actual_credit};
+    if (value > reserve_credit) {
+      std::cout << std::endl
+                << "You can take out at most $" << reserve_credit
+                << " in credit at the moment." << std::endl
+                << "Value of all of your credits cannot be greater than $"
+                << max_credit << ", while you have taken out $" << actual_credit
+                << " already." << std::endl;
+      return true;
+    }
 
     std::cout << std::endl << "For what period of time? ";
     unsigned int deadline;
@@ -81,7 +99,17 @@ bool MonopolySinglePlayer::playerAction() {
     if (sanitizeInput()) {
       return true;
     }
-
+    if (deadline > statutorily::X) {
+      std::cout << std::endl
+                << "You can take out a credit for a maximum of "
+                << statutorily::X << " months." << std::endl;
+      return true;
+    }
+    company->takeOutCredit(value, deadline);
+    return true;
+  }
+  if (input == "status") {
+    printCompanyStatus();
     return true;
   }
   if (input == "kt") {
@@ -103,6 +131,14 @@ void MonopolySinglePlayer::printHelp() {
       << "+ kt\t - go to next month and print the status of your company\n"
       << "+ help\t - print availabe commands\n"
       << "+ instruction\t - print rules of the game\n\n ";
+}
+
+void MonopolySinglePlayer::printCompanyStatus() {
+  std::cout << "Account Balance: $" << company->getAccountBalance() << std::endl
+            << "Value of the company: $" << company->getCompanyValue()
+            << std::endl
+            << "Total value of all credits: $" << company->getSumOfAllCredits()
+            << std::endl;
 }
 
 void MonopolySinglePlayer::printInstruction() {}

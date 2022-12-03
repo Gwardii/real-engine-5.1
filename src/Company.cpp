@@ -110,9 +110,21 @@ void Company::payOffCredits() {
 
 const double Company::getAccountBalance() const { return account_balance; }
 const double Company::getCompanyValue() const {
+  if (income_history.empty()) {
+    return 0;
+  }
   if (income_history.size() > statutorily::N) {
     return std::accumulate(income_history.end() - statutorily::N,
-                           income_history.end(), 0);
+                           income_history.end(), 0) /
+           statutorily::N;
   }
-  return std::accumulate(income_history.begin(), income_history.end(), 0);
+  return std::accumulate(income_history.begin(), income_history.end(), 0) /
+         income_history.size();
+}
+
+const double Company::getSumOfAllCredits() const {
+  return std::accumulate(credits.begin(), credits.end(), 0.,
+                         [](double x, const std::unique_ptr<Credit> &y) {
+                           return x + y->getValue();
+                         });
 }

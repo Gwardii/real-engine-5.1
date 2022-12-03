@@ -8,7 +8,6 @@
 #include <sstream>
 #include <vector>
 
-
 class Company {
 private:
   double account_balance;
@@ -28,4 +27,5 @@ public:
   void getIncome();
   const double getAccountBalance() const;
   const double getCompanyValue() const;
+  const double getSumOfAllCredits() const;
 };
