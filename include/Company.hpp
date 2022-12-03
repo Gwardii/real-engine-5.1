@@ -28,4 +28,6 @@ public:
   const double getAccountBalance() const;
   const double getCompanyValue() const;
   const double getSumOfAllCredits() const;
+  double calculateSalaries();
+  double calculateIncome();
 };

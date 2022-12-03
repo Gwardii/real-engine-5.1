@@ -16,7 +16,7 @@ bool sanitizeInput() {
 MonopolySinglePlayer::MonopolySinglePlayer() {}
 
 void MonopolySinglePlayer::launch() {
-  std::cout << "Welcome to Monopoly Single Player! Let's build the best "
+  std::cout << "\n\nWelcome to Monopoly Single Player! Let's build the best "
                "company the world has ever seen!"
             << std::endl;
   printHelp();
@@ -129,15 +129,21 @@ void MonopolySinglePlayer::printHelp() {
       << "+ zrob\t - hire a worker\n"
       << "+ kred\t - take a credit\n"
       << "+ kt\t - go to next month and print the status of your company\n"
+      << "+ status - print current status\n"
       << "+ help\t - print availabe commands\n"
-      << "+ instruction\t - print rules of the game\n\n ";
+      << "+ instruction\t - print rules of the game\n\n";
 }
 
 void MonopolySinglePlayer::printCompanyStatus() {
-  std::cout << "Account Balance: $" << company->getAccountBalance() << std::endl
-            << "Value of the company: $" << company->getCompanyValue()
+  std::cout << "Account Balance: \t\t$" << company->getAccountBalance()
             << std::endl
-            << "Total value of all credits: $" << company->getSumOfAllCredits()
+            << "Value of the company: \t\t$" << company->getCompanyValue()
+            << std::endl
+            << "Total value of all credits: \t$"
+            << company->getSumOfAllCredits() << std::endl
+            << "Total value of salaries to pay: $"
+            << company->calculateSalaries() << std::endl
+            << "Expected income: \t\t$" << company->calculateIncome()
             << std::endl;
 }
 

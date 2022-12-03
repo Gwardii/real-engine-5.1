@@ -7,10 +7,10 @@ const size_t MAX_NO_CREDITS = 5000;
 const double MAX_CREDIT = 1e4;
 
 // the effectiveness of employees
-const double CI = 50;
-const int CMag = 50;
-const int CMkt = 50;
-const int CR = 50;
+const double CI = 1000;
+const int CMag = 40;
+const int CMkt = 60;
+const int CR = 70;
 
 // employees' salaries
 const double ENGINEER_SALARY = 1e4;

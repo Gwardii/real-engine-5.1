@@ -69,28 +69,10 @@ void Company::takeOutCredit(double value, unsigned int deadline) {
   credits.push_back(std::make_unique<Credit>(value, deadline));
 }
 
-void Company::paySalaries() {
-  account_balance -=
-      statutorily::ENGINEER_SALARY * employees.getNoEmplyoeesWithPosition(0) +
-      statutorily::STOREMAN_SALARY * employees.getNoEmplyoeesWithPosition(1) +
-      statutorily::MARKETER_SALARY * employees.getNoEmplyoeesWithPosition(2) +
-      statutorily::WORKER_SALARY * employees.getNoEmplyoeesWithPosition(3);
-}
+void Company::paySalaries() { account_balance -= calculateSalaries(); }
 
 void Company::getIncome() {
-  products_in_store +=
-      statutorily::CR * employees.getNoEmplyoeesWithPosition(3);
-  long long store_capacity =
-      statutorily::CMag * employees.getNoEmplyoeesWithPosition(1);
-  products_in_store =
-      (products_in_store < store_capacity) ? products_in_store : store_capacity;
-  long long demand =
-      statutorily::CMkt * employees.getNoEmplyoeesWithPosition(2);
-  long long sold_products =
-      (demand < products_in_store) ? demand : products_in_store;
-  products_in_store -= sold_products;
-  double income =
-      statutorily::CI * sold_products * employees.getNoEmplyoeesWithPosition(0);
+  double income = calculateIncome();
   account_balance += income;
   income_history.push_back(income);
 }
@@ -127,4 +109,30 @@ const double Company::getSumOfAllCredits() const {
                          [](double x, const std::unique_ptr<Credit> &y) {
                            return x + y->getValue();
                          });
+}
+
+double Company::calculateSalaries() {
+  return (double)statutorily::ENGINEER_SALARY *
+             employees.getNoEmplyoeesWithPosition(0) +
+         statutorily::STOREMAN_SALARY *
+             employees.getNoEmplyoeesWithPosition(1) +
+         statutorily::MARKETER_SALARY *
+             employees.getNoEmplyoeesWithPosition(2) +
+         statutorily::WORKER_SALARY * employees.getNoEmplyoeesWithPosition(3);
+}
+double Company::calculateIncome() {
+
+  products_in_store +=
+      statutorily::CR * employees.getNoEmplyoeesWithPosition(3);
+  long long store_capacity =
+      statutorily::CMag * employees.getNoEmplyoeesWithPosition(1);
+  products_in_store =
+      (products_in_store < store_capacity) ? products_in_store : store_capacity;
+  long long demand =
+      statutorily::CMkt * employees.getNoEmplyoeesWithPosition(2);
+  long long sold_products =
+      (demand < products_in_store) ? demand : products_in_store;
+  products_in_store -= sold_products;
+  return statutorily::CI * sold_products *
+         employees.getNoEmplyoeesWithPosition(0);
 }
